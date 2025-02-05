@@ -1,8 +1,6 @@
 package com.example.Import.appuser;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +20,23 @@ import java.util.Collections;
 
 public class AppUser implements UserDetails {
 
+
+    @SequenceGenerator(
+            name = "employe_sequence",
+            sequenceName ="employe_sequence",
+            allocationSize = 1
+    )
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "employe_sequence"
+    )
     private Long id;
     private String name;
     private String username;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
     private Boolean locked;
     private Boolean enabled;
